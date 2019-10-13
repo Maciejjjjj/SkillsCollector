@@ -5,20 +5,27 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
+import pl.Maciejjjjj.model.entities.Skill;
+import pl.Maciejjjjj.model.entities.Source;
+import pl.Maciejjjjj.model.entities.User;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+@WebListener
 public class HibernateInitializer implements ServletContextListener {
 
     public static final String k = "session_factory";
 
+    Logger logger = Logger.getLogger(HibernateInitializer.class.getName());
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+
         try {
             Configuration configuration = new Configuration();
 
@@ -40,9 +47,9 @@ public class HibernateInitializer implements ServletContextListener {
 
             // Odkomentuj poniższe instrukcje po utworzeniu klas encji (kolejne zadania)
 
-            //configuration.addAnnotatedClass(User.class);
-            //configuration.addAnnotatedClass(Source.class);
-            //configuration.addAnnotatedClass(Skill.class);
+            configuration.addAnnotatedClass(User.class);
+            configuration.addAnnotatedClass(Source.class);
+            configuration.addAnnotatedClass(Skill.class);
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
@@ -54,11 +61,10 @@ public class HibernateInitializer implements ServletContextListener {
 
         } catch (Exception e) {
 
-            Logger logger = null;
             logger.log(Level.SEVERE, "Błąd konfiguracji Hibernate!", e);
         }
 
 
     }
-    
+
 }
