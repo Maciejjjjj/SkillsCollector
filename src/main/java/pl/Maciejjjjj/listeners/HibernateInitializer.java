@@ -61,7 +61,7 @@ public class HibernateInitializer implements ServletContextListener {
 
         } catch (Exception e) {
 
-            logger.log(Level.SEVERE, "Błąd konfiguracji Hibernate!", e);
+            logger.log(Level.SEVERE, "Hibernate configuration error!", e);
         }
 
 
