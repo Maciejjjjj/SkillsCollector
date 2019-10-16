@@ -66,3 +66,5 @@ INSERT INTO users_known_sources (user_id, source_id) VALUES (3, 5);
 INSERT INTO users_known_sources (user_id, source_id) VALUES (3, 6);
 
 SELECT * FROM users;
+
+DELETE  FROM users WHERE id = 2;
